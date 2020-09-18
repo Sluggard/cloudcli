@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: auth
+  cloud:
+    nacos:
+      config:
+        server-addr: nacos:8848
+        file-extension: yml
+        namespace: 68cb19f6-574c-4a6f-ad7f-3a87935381ec
+        shared-dataids: application.${spring.cloud.nacos.config.file-extension}
+
+
+
+---
+spring:
+  profiles: dev
+  cloud:
+    nacos:
+      config:
+        namespace: dbb57b6f-6f85-4a44-82a5-2a66a4ac443e
+
+
+---
+spring:
+  profiles: test
+  cloud:
+    nacos:
+      config:
+        namespace: a7910f01-7685-40d4-89cc-35ec2139bf59
+
+---
+spring:
+  profiles: prod
+  cloud:
+    nacos:
+      config:
+        namespace: 0306c43f-e1ab-4dec-8764-aa63860b8fec
