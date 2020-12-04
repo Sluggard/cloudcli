@@ -31,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .sessionManagement().disable()
                 .csrf().disable()
-                .formLogin().permitAll()
+                .httpBasic()
                 .and()
                 .authorizeRequests()
                 .antMatchers("/oauth/**").permitAll()
