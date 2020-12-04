@@ -1,6 +1,6 @@
 spring:
   application:
-    name: business-user
+    name: user
   cloud:
     nacos:
       config:
