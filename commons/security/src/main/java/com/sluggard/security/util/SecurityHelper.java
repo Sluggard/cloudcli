@@ -52,9 +52,9 @@ public class SecurityHelper {
 
         List<String> roleIds = new ArrayList<>();
         authorities.stream()
-                .filter(granted -> StringUtils.startsWith(granted.getAuthority(), SecurityConstants.ROLE))
+                .filter(granted -> StringUtils.startsWith(granted.getAuthority(), SecurityConstants.ROLE_PREFIX))
                 .forEach(granted -> {
-                    String roleName = StringUtils.removeStart(granted.getAuthority(), SecurityConstants.ROLE);
+                    String roleName = StringUtils.removeStart(granted.getAuthority(), SecurityConstants.ROLE_PREFIX);
                     roleIds.add(roleName);
                 });
         return roleIds;
