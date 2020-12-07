@@ -13,7 +13,7 @@
         <module>auth</module>
         <module>commons</module>
         <module>gateway</module>
-        <module>business</module>
+        <module>upms</module>
     </modules>
     <groupId>com.sluggard</groupId>
     <artifactId>cloudcli</artifactId>
