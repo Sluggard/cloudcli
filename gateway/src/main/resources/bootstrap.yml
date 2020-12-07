@@ -10,7 +10,6 @@ spring:
         shared-dataids: application.${spring.cloud.nacos.config.file-extension}
 
 
-
 ---
 spring:
   profiles: dev
