@@ -43,9 +43,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .anyRequest().permitAll()
-                .and()
-                .formLogin().permitAll();
+                .anyRequest().permitAll();
     }
 
     private DefaultTokenServices tokenServices() {

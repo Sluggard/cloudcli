@@ -26,6 +26,5 @@ public class Customer {
 
     private Boolean disable;
 
-    private String[] roles = new String[]{};
-
+    private List<String> roles;
 }

@@ -11,6 +11,7 @@ import com.sluggard.security.util.SecurityHelper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.Objects;
 
 /**
@@ -43,6 +44,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
         Customer customer = new Customer();
         BeanUtils.copyProperties(sysUser, customer);
+
+        // 查询用户角色
 
         return customer;
     }

@@ -29,9 +29,6 @@ public class SysUserController {
     @Autowired
     private SysUserService sysUserService;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     @ApiOperation("通过用户名获取用户信息")
     @GetMapping("/loadUserByUsername/{username}")
     public Customer loadUserByUsername(@PathVariable("username") String username){

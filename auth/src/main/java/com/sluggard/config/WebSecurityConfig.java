@@ -18,7 +18,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * @Description: security安全配置类
  * @Copyright © 2019-2021
  */
-@Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -31,12 +30,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .sessionManagement().disable()
                 .csrf().disable()
-                .httpBasic()
-                .and()
                 .authorizeRequests()
+                .antMatchers("/custom/login","/custom/login-error")
+                .permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .apply(mobileAuthenticationConfig);
+                .apply(mobileAuthenticationConfig)
+                .and()
+                .formLogin()
+                .loginPage("/custom/login")
+                .loginProcessingUrl("/custom/login")
+                .failureUrl("/custom/login-error");
     }
 
 

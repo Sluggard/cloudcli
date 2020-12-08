@@ -9,11 +9,15 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.security.KeyPair;
@@ -32,7 +36,7 @@ import java.util.Map;
  * @Copyright © 2019-2021
  */
 @AllArgsConstructor
-@RestController
+@Controller
 @Api(value="AuthEndpoint",tags={"客户端接口"})
 public class AuthEndpoint {
 
@@ -43,6 +47,7 @@ public class AuthEndpoint {
 
     @ApiOperation("注册客户端")
     @PostMapping("register")
+    @ResponseBody
     public ResponseResult<String> registerClient(@Valid @RequestBody  OauthClientDetails oauthClientDetails){
         oauthClientDetailsService.register(oauthClientDetails);
         return ResponseResult.ok();
@@ -50,10 +55,23 @@ public class AuthEndpoint {
 
     @ApiOperation("获取")
     @GetMapping("/.well-known/jwks.json")
+    @ResponseBody
     public Map<String, Object> getKey() {
         RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
         RSAKey key = new RSAKey.Builder(publicKey).build();
         return new JWKSet(key).toJSONObject();
+    }
+
+    @GetMapping("/custom/login")
+    public String loginPage(){
+        return "auth-login";
+    }
+
+    @RequestMapping("/custom/login-error")
+    public ModelAndView loginError(ModelAndView modelAndView){
+        modelAndView.setViewName("auth-login");
+        modelAndView.addObject("msg", "用户名或者密码错误");
+        return modelAndView;
     }
 
 }

@@ -4,18 +4,17 @@ import com.sluggard.feign.client.UserClient;
 import com.sluggard.feign.vo.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * @author：lizheng@homedone.net
@@ -42,14 +41,19 @@ public class CustomUserServiceImpl implements UserDetailsService {
             throw new BadCredentialsException("用户不存在！");
         }
 
+        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
+        List<String> roles = customer.getRoles();
+        if(Objects.nonNull(roles) && !roles.isEmpty()) {
+            roles.forEach(role -> authorities.add(new SimpleGrantedAuthority(role)));
+        }
+
         return new User(customer.getUsername(),
                 customer.getPassword(),
                 !customer.getDisable(),
                 true,
                 true,
                 !customer.getLocked(),
-                AuthorityUtils.createAuthorityList(customer.getRoles())
-        );
+                authorities);
     }
 
 }

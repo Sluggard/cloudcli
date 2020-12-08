@@ -88,8 +88,8 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
                 .authenticationManager(authenticationManager)
                 .userDetailsService(userDetailsService)
                 .tokenServices(tokenService())
-                .tokenGranter(customTokenGranters.tokenGranter());
-        endpoints.exceptionTranslator(webResponseExceptionTranslator);
+                .tokenGranter(customTokenGranters.tokenGranter())
+                .exceptionTranslator(webResponseExceptionTranslator);
     }
 
     @Bean
