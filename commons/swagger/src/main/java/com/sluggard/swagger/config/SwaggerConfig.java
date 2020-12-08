@@ -44,7 +44,7 @@ public class SwaggerConfig {
     private String license = "Apache 2.0";
     private String licenseUrl = "http://www.apache.org/licenses/LICENSE-2.0.html";
     private String basePackage = "com.sluggard";
-    private String groupName = "-center";
+    private String groupName = "";
     private String contactName = "lizheng";
 
     private ApiInfo apiInfo() {

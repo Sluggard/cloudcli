@@ -23,7 +23,9 @@ public class ResponseResult<T> implements Serializable {
 
     public static final Integer RESPONSE_RESULT_CODE_ERROR = 500;
 
-    public static final Integer RESPONSE_RESULT_CODE_NO_ACCESS = 403;
+    public static final Integer RESPONSE_RESULT_SERVER_DOWN = 503;
+
+    public static final Integer RESPONSE_RESULT_CODE_FORBIDDEN = 403;
 
     public static final Integer RESPONSE_RESULT_CODE_UNAUTHORIZED = 401;
 

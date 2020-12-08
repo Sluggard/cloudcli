@@ -1,4 +1,4 @@
-package com.sluggard.common.handler;
+package com.sluggard.handler;
 
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;

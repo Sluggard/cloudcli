@@ -1,4 +1,4 @@
-package com.sluggard.common.handler;
+package com.sluggard.handler;
 
 
 import com.sluggard.common.exception.ApiException;

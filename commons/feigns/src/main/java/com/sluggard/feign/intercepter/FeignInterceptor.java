@@ -1,4 +1,4 @@
-package com.sluggard.common.intercepter;
+package com.sluggard.feign.intercepter;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;

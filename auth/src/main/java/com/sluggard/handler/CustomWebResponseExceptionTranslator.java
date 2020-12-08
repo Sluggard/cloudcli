@@ -1,4 +1,4 @@
-package com.sluggard.common.handler;
+package com.sluggard.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

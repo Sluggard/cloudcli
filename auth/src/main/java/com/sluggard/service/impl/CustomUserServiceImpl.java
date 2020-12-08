@@ -3,6 +3,7 @@ package com.sluggard.service.impl;
 import com.sluggard.feign.client.UserClient;
 import com.sluggard.feign.vo.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -38,7 +39,7 @@ public class CustomUserServiceImpl implements UserDetailsService {
 
         Customer customer = userClient.loadUserByUsername(username);
         if(Objects.isNull(customer)){
-            return null;
+            throw new BadCredentialsException("用户不存在！");
         }
 
         return new User(customer.getUsername(),
