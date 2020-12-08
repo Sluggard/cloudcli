@@ -1,6 +1,7 @@
 package com.sluggard.config;
 
-import com.sluggard.handler.CustomerAccessDeniedHandler;
+import com.sluggard.security.custom.CustomAccessDeniedHandler;
+import com.sluggard.security.custom.CustomAuthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -57,7 +58,10 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
     private UserDetailsService userDetailsService;
 
     @Autowired
-    private CustomerAccessDeniedHandler customerAccessDeniedHandler;
+    private CustomAccessDeniedHandler customerAccessDeniedHandler;
+
+    @Autowired
+    private CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
 
     @Autowired
     private CustomTokenGranters customTokenGranters;
@@ -77,7 +81,8 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
         security.allowFormAuthenticationForClients()
                 .tokenKeyAccess("permitAll()")
                 .checkTokenAccess("isAuthenticated()")
-                .accessDeniedHandler(customerAccessDeniedHandler);
+                .accessDeniedHandler(customerAccessDeniedHandler)
+                .authenticationEntryPoint(customAuthenticationEntryPoint);
 
     }
 
