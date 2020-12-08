@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @version V1.0
  * @Package com.homedone.gateway.fallback
  * @date 2020/1/9 15:25
- * @Copyright © 2019-2021 杭州亿房达科技有限公司
+ * @Copyright © 2019-2021
  */
 @RestController
 @RequestMapping("/fallback")

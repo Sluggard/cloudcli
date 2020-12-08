@@ -7,7 +7,7 @@ import lombok.Data;
  * @version V1.0
  * @Package com.homedone.common.exception
  * @date 2020/1/14 12:24
- * @Copyright © 2019-2021 杭州亿房达科技有限公司
+ * @Copyright © 2019-2021
  */
 @Data
 public class ApiException extends RuntimeException {

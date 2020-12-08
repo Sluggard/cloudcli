@@ -13,7 +13,7 @@ import java.util.Map;
  * @version V1.0
  * @Package com.homedone.auth.config
  * @date 2020/5/28 10:46
- * @Copyright © 2019-2021 杭州亿房达科技有限公司
+ * @Copyright © 2019-2021
  */
 public class CustomTokenEnhancer implements TokenEnhancer {
 

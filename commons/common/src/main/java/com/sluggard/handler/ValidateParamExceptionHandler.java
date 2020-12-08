@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  * @author lizheng
  * @version V1.0
  * @Description:
- * @Copyright © 2019-2021 杭州亿房达科技有限公司
+ * @Copyright © 2019-2021
  */
 @ControllerAdvice("com.sluggard")
 @ResponseBody

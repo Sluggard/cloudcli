@@ -8,7 +8,7 @@ import com.sluggard.common.exception.ApiException;
  * @version V1.0
  * @Package com.homedone.common.util
  * @date 2020/1/15 17:27
- * @Copyright © 2019-2021 杭州亿房达科技有限公司
+ * @Copyright © 2019-2021
  */
 public class AssertHelper {
 

@@ -12,7 +12,7 @@ import org.springframework.web.util.pattern.PathPatternParser;
  * @version V1.0
  * @Package com.homedone.gateway.config
  * @date 2020/1/13 15:44
- * @Copyright © 2019-2021 杭州亿房达科技有限公司
+ * @Copyright © 2019-2021
  */
 @Component
 public class CorsFilterConfig {

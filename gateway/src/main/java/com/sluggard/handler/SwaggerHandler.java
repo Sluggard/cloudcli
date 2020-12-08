@@ -20,7 +20,7 @@ import java.util.Optional;
  * @version V1.0
  * @Package com.homedone.gateway.handler
  * @date 2020/1/14 18:04
- * @Copyright © 2019-2021 杭州亿房达科技有限公司
+ * @Copyright © 2019-2021
  */
 @RestController
 @RequestMapping("/swagger-resources")

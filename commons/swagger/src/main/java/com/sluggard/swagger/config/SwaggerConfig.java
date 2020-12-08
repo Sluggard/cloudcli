@@ -27,7 +27,7 @@ import java.util.List;
  * @version V1.0
  * @Package com.homedone.user.config
  * @date 2020/1/10 10:08
- * @Copyright © 2019-2021 杭州亿房达科技有限公司
+ * @Copyright © 2019-2021
  */
 @Configuration
 @Data

@@ -16,7 +16,7 @@ import java.security.KeyPair;
  * @version V1.0
  * @Package com.homedone.auth.config
  * @date 2020/5/28 10:45
- * @Copyright © 2019-2021 杭州亿房达科技有限公司
+ * @Copyright © 2019-2021
  */
 @Configuration
 public class TokenStoreConfig {

@@ -13,7 +13,7 @@ import java.io.Serializable;
  * @version V1.0
  * @Package com.homedone.common.vo
  * @date 2020/1/9 16:54
- * @Copyright © 2019-2021 杭州亿房达科技有限公司
+ * @Copyright © 2019-2021
  */
 @Data
 @ApiModel(value="PageQuery", description="条件查询实体")

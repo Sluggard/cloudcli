@@ -12,7 +12,7 @@ import java.util.Date;
  * @version V1.0
  * @Package com.sluggard.app.handler
  * @date 2020/5/22 13:47
- * @Copyright © 2019-2021 杭州亿房达科技有限公司
+ * @Copyright © 2019-2021
  */
 @Slf4j
 @Component

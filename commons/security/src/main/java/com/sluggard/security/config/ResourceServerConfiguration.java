@@ -17,7 +17,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
  * @author lizheng
  * @version V1.0
  * @Description: 资源服务配置
- * @Copyright © 2019-2021 杭州亿房达科技有限公司
+ * @Copyright © 2019-2021
  */
 @Configuration
 @EnableResourceServer

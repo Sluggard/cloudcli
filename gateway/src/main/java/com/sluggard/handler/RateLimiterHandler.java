@@ -10,7 +10,7 @@ import reactor.core.publisher.Mono;
  * @version V1.0
  * @Package com.homedone.gateway.handler
  * @date 2020/1/15 15:54
- * @Copyright © 2019-2021 杭州亿房达科技有限公司
+ * @Copyright © 2019-2021
  */
 @Configuration
 public class RateLimiterHandler {

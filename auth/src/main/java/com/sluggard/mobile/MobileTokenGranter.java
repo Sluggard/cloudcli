@@ -27,7 +27,7 @@ import java.util.Map;
  * 最后更新日期：
  * 修改人：
  * 复审人：
- * @Copyright © 2019-2021 杭州亿房达科技有限公司
+ * @Copyright © 2019-2021
  */
 public class MobileTokenGranter extends AbstractTokenGranter {
 
