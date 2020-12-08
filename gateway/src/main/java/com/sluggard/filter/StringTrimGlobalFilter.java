@@ -78,7 +78,7 @@ public class StringTrimGlobalFilter implements GlobalFilter, Ordered {
         // 读取并修改请求体数据
         Mono<String> modifiedBody = serverRequest.bodyToMono(String.class)
                 .flatMap(body -> {
-                    log.info(String.format("Method:{%s} Host:{%s} Path:{%s} QueryParam:{%s} Body:{%s}",
+                    log.info(String.format("\nMethod:{%s}\nHost:{%s}\nPath:{%s}\nQueryParam:{%s}\nBody:{%s}",
                             exchange.getRequest().getMethod().name(),
                             exchange.getRequest().getURI().getHost(),
                             exchange.getRequest().getURI().getPath(),
