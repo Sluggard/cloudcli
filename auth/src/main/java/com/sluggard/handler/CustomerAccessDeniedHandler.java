@@ -24,7 +24,7 @@ public class CustomerAccessDeniedHandler implements AccessDeniedHandler {
 
     @Override
     public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AccessDeniedException e) throws IOException, ServletException {
-        httpServletResponse.setStatus(HttpStatus.OK.value());
+        httpServletResponse.setStatus(HttpStatus.FORBIDDEN.value());
         httpServletResponse.setHeader("Cache-Control", "no-store");
         httpServletResponse.setHeader("Pragma", "no-cache");
         httpServletResponse.setHeader("Content-Type", "application/json;charset=UTF-8");
