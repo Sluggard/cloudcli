@@ -49,27 +49,28 @@ import java.util.function.Supplier;
 @Slf4j
 @Component
 @RefreshScope
-public class StringTrimGlobalFilter implements GlobalFilter, Ordered {
+public class RequestDetailLogGlobalFilter implements GlobalFilter, Ordered {
 
     private static final String CHARSET = "UTF-8";
 
     private final List<HttpMessageReader<?>> messageReaders;
 
-    public StringTrimGlobalFilter() {
+    public RequestDetailLogGlobalFilter() {
         this.messageReaders = HandlerStrategies.withDefaults().messageReaders();
     }
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         // 打印请求路径
-
-        ServerHttpRequest request = exchange.getRequest();
-
+        log.info(String.format("\nMethod:{%s}\nHost:{%s}\nPath:{%s}\nQueryParam:{%s}",
+                exchange.getRequest().getMethod().name(),
+                exchange.getRequest().getURI().getHost(),
+                exchange.getRequest().getURI().getPath(),
+                exchange.getRequest().getQueryParams()));
         HttpHeaders headers = new HttpHeaders();
         headers.putAll(exchange.getRequest().getHeaders());
         headers.remove(HttpHeaders.CONTENT_LENGTH);
-
-        URI newUri = convertUrlParams(request);
+        URI newUri = exchange.getRequest().getURI();
 
         // 获取参数
         ServerRequest serverRequest = ServerRequest.create(exchange, messageReaders);
@@ -78,11 +79,7 @@ public class StringTrimGlobalFilter implements GlobalFilter, Ordered {
         // 读取并修改请求体数据
         Mono<String> modifiedBody = serverRequest.bodyToMono(String.class)
                 .flatMap(body -> {
-                    log.info(String.format("\nMethod:{%s}\nHost:{%s}\nPath:{%s}\nQueryParam:{%s}\nBody:{%s}",
-                            exchange.getRequest().getMethod().name(),
-                            exchange.getRequest().getURI().getHost(),
-                            exchange.getRequest().getURI().getPath(),
-                            exchange.getRequest().getQueryParams(),body));
+                    log.info(String.format("Body:{%s}", body));
                     return Mono.just(body);
                 });
 
@@ -125,74 +122,6 @@ public class StringTrimGlobalFilter implements GlobalFilter, Ordered {
                             .request(serverHttpRequest)
                             .build());
                 }));
-    }
-
-    /**
-     * 去除？参数中以及地址链接的空格
-     *
-     * @param request
-     * @return
-     */
-    private URI convertUrlParams(ServerHttpRequest request) {
-        URI uri = request.getURI();
-        String originalQuery = uri.getRawQuery();
-        StringBuffer query = new StringBuffer();
-
-        handlerQueryParams(originalQuery, query);
-
-        String path = handlerUri(uri);
-
-        return UriComponentsBuilder.fromUri(uri)
-                .replacePath(path)
-                .replaceQuery(query.toString()).build(true).toUri();
-    }
-
-    /**
-     * 处理地址链接
-     * @param uri
-     * @return
-     */
-    private String handlerUri(URI uri) {
-        String path = uri.getPath();
-        String[] strings = StringUtils.split(path, "/");
-        for (int i = 0; i < strings.length; i++) {
-            strings[i] = urlDecodeTrim(strings[i]);
-        }
-        path = Joiner.on("/").join(strings);
-        return path;
-    }
-
-    /**
-     * 处理？参数
-     * @param originalQuery
-     * @param query
-     */
-    private void handlerQueryParams(String originalQuery, StringBuffer query) {
-        if(StringUtils.isBlank(originalQuery)){
-            return;
-        }
-        String[] params = originalQuery.split("&");
-        for (String param : params) {
-            String[] keyValues = param.split("=");
-            if (keyValues.length != 2) {
-                continue;
-            }
-
-            query.append(keyValues[0])
-                    .append("=")
-                    .append(urlDecodeTrim(keyValues[1]));
-
-        }
-    }
-
-    private String urlDecodeTrim(String source){
-        String result = "";
-        try {
-            result = URLEncoder.encode(URLDecoder.decode(source, CHARSET).trim(), CHARSET);
-        } catch (UnsupportedEncodingException e) {
-            log.error("请求链接解码错误", e);
-        }
-        return result;
     }
 
     @Override
