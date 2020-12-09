@@ -10,15 +10,14 @@ import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.KeyPair;
 import java.security.interfaces.RSAPublicKey;
@@ -62,15 +61,12 @@ public class AuthEndpoint {
         return new JWKSet(key).toJSONObject();
     }
 
-    @GetMapping("/custom/login")
-    public String loginPage(){
-        return "auth-login";
-    }
-
-    @RequestMapping("/custom/login-error")
-    public ModelAndView loginError(ModelAndView modelAndView){
+    @RequestMapping("/custom/login")
+    public ModelAndView loginPage(ModelAndView modelAndView, HttpServletRequest request){
+        modelAndView.addObject("username", request.getParameter("username"));
+        modelAndView.addObject("password", request.getParameter("password"));
+        modelAndView.addObject("msg", request.getAttribute("error"));
         modelAndView.setViewName("auth-login");
-        modelAndView.addObject("msg", "用户名或者密码错误");
         return modelAndView;
     }
 

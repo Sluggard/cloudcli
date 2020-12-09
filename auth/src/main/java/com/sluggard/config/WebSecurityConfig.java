@@ -1,5 +1,6 @@
 package com.sluggard.config;
 
+import com.sluggard.handler.LoginFailureHandler;
 import com.sluggard.mobile.MobileAuthenticationConfig;
 import com.sluggard.mobile.MobileAuthenticationProcessingFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +26,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private MobileAuthenticationConfig mobileAuthenticationConfig;
 
+    @Autowired
+    private LoginFailureHandler loginFailureHandler;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .sessionManagement().disable()
+                // 授权码需要开启
+                .sessionManagement()
+                .and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/custom/login","/custom/login-error")
+                .antMatchers("/custom/login")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -40,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/custom/login")
                 .loginProcessingUrl("/custom/login")
-                .failureUrl("/custom/login-error");
+                .failureHandler(loginFailureHandler);
     }
 
 

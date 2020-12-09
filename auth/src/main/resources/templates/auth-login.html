@@ -55,13 +55,13 @@
     <div class="form-container">
         <p class="title">用户登录</p>
         <form name="loginForm" method="post" action="/custom/login">
-            <input type="text" name="username" placeholder="用户名"/>
+            <input type="text" th:value="${username}" name="username" placeholder="用户名"/>
             <br>
-            <input type="password" name="password" placeholder="密码"/>
+            <input th:value="${password}" type="password" name="password" placeholder="密码"/>
             <br>
             <button type="submit" class="btn">登 &nbsp;&nbsp; 录</button>
         </form>
-        <p style="color: red" th:text="${param.msg}"></p>
+        <p style="color: red" th:text="${msg}"></p>
     </div>
 </div>
 </body>
