@@ -55,14 +55,16 @@ public class RequestDetailLogGlobalFilter implements GlobalFilter, Ordered {
 
     private final List<HttpMessageReader<?>> messageReaders;
 
+    private static final String START_TIME = "startTime";
+
     public RequestDetailLogGlobalFilter() {
         this.messageReaders = HandlerStrategies.withDefaults().messageReaders();
     }
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        // 打印请求路径
-        log.info(String.format("\nMethod:{%s}\nHost:{%s}\nPath:{%s}\nQueryParam:{%s}",
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append(String.format("\nMethod:{%s}\nHost:{%s}\nPath:{%s}\nQueryParam:{%s}",
                 exchange.getRequest().getMethod().name(),
                 exchange.getRequest().getURI().getHost(),
                 exchange.getRequest().getURI().getPath(),
@@ -79,7 +81,7 @@ public class RequestDetailLogGlobalFilter implements GlobalFilter, Ordered {
         // 读取并修改请求体数据
         Mono<String> modifiedBody = serverRequest.bodyToMono(String.class)
                 .flatMap(body -> {
-                    log.info(String.format("Body:{%s}", body));
+                    stringBuffer.append(String.format("\nBody:%s", body));
                     return Mono.just(body);
                 });
 
@@ -117,11 +119,30 @@ public class RequestDetailLogGlobalFilter implements GlobalFilter, Ordered {
                             .mutate()
                             .uri(newUri)
                             .build();
-                    return chain.filter(exchange
+
+                    return excute(exchange
                             .mutate()
                             .request(serverHttpRequest)
-                            .build());
+                            .build(),chain, stringBuffer);
                 }));
+    }
+
+    /**
+     * @author lizheng
+     * @version V1.0
+     * @Description: 路由转发 打印调用时间
+     * @Copyright © 2019-2021
+     */
+    private Mono<Void> excute(ServerWebExchange exchange, GatewayFilterChain chain, StringBuffer stringBuffer) {
+        exchange.getAttributes().put(START_TIME, System.currentTimeMillis());
+        return chain.filter(exchange).then(Mono.fromRunnable(() -> {
+            Long startTime = exchange.getAttribute(START_TIME);
+            if (startTime != null) {
+                Long executeTime = (System.currentTimeMillis() - startTime);
+                stringBuffer.append(String.format("\nTime:{%sms}", executeTime));
+                log.info(stringBuffer.toString());
+            }
+        }));
     }
 
     @Override

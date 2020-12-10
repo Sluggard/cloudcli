@@ -33,7 +33,7 @@ public class CustomWebResponseExceptionTranslator implements WebResponseExceptio
         response.setHeader("Cache-Control", "no-store");
         response.setHeader("Pragma", "no-cache");
         response.setContentType("application/json;charset=UTF-8");
-        response.setStatus(HttpStatus.UNAUTHORIZED.value());
+        response.setStatus(HttpStatus.OK.value());
 
         ResponseResult<Object> error = ResponseResult.error(ResponseResult.RESPONSE_RESULT_CODE_ERROR, e.getMessage());
         if ("User is disabled".equals(e.getMessage())) {
