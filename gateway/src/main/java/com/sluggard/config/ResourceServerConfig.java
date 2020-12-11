@@ -4,14 +4,16 @@ import com.sluggard.handler.CustomAccessDeniedHandler;
 import com.sluggard.handler.CustomAuthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 
 @EnableWebFluxSecurity
+@RefreshScope
 public class ResourceServerConfig {
-    @Value("${gatewayWhiteList:}")
+    @Value("${gatewayWhiteList:''}")
     private String[] whiteList;
 
     @Autowired
@@ -25,7 +27,15 @@ public class ResourceServerConfig {
         http
                 .httpBasic().disable()
                 .authorizeExchange()
-                .pathMatchers("/doc**","/swagger**/**","/api/*/v2/**","/webjars/**","/api/auth/**","/actuator/**")
+                .pathMatchers(
+                        "/doc**",
+                        "/swagger**/**",
+                        "/api/*/v2/**",
+                        "/webjars/**",
+                        "/api/auth/**",
+                        "/actuator/**")
+                .permitAll()
+                .pathMatchers(whiteList)
                 .permitAll()
                 .anyExchange().authenticated()
                 .and()
