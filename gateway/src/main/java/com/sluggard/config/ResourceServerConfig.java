@@ -11,7 +11,6 @@ import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 
 @EnableWebFluxSecurity
-@RefreshScope
 public class ResourceServerConfig {
     @Value("${gatewayWhiteList:''}")
     private String[] whiteList;
