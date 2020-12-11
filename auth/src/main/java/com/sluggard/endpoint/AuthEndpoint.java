@@ -73,7 +73,7 @@ public class AuthEndpoint {
         return new JWKSet(key).toJSONObject();
     }
 
-    @RequestMapping("/custom/login")
+    @RequestMapping("/login")
     public ModelAndView loginPage(ModelAndView modelAndView, HttpServletRequest request){
         modelAndView.addObject("username", request.getParameter("username"));
         modelAndView.addObject("password", request.getParameter("password"));
