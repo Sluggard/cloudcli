@@ -7,7 +7,7 @@ spring:
         server-addr: 34.92.240.16:8848
         file-extension: yml
         namespace: 68cb19f6-574c-4a6f-ad7f-3a87935381ec
-        shared-dataids: application.${spring.cloud.nacos.config.file-extension}
+        shared-configs: application.${spring.cloud.nacos.config.file-extension}
 
 
 
