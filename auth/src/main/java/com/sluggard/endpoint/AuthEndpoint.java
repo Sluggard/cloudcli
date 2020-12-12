@@ -56,6 +56,12 @@ public class AuthEndpoint {
     @Autowired
     private OauthClientDetailsService oauthClientDetailsService;
 
+    @Autowired
+    private DefaultKaptcha producer;
+
+    @Autowired
+    StringRedisTemplate stringRedisTemplate;
+
     @ApiOperation("注册客户端")
     @PostMapping("register")
     @ResponseBody
@@ -82,11 +88,7 @@ public class AuthEndpoint {
         return modelAndView;
     }
 
-    @Autowired
-    private DefaultKaptcha producer;
 
-    @Autowired
-    StringRedisTemplate stringRedisTemplate;
 
     @ApiOperation("获取验证码接口")
     @GetMapping("/captcha")
@@ -116,7 +118,7 @@ public class AuthEndpoint {
         Map<String, Object> map = new HashMap<>(2);
         map.put("checkCodePrefix", checkCodePrefix);
         map.put("img", src);
-        stringRedisTemplate.opsForValue().set(checkCodePrefix, text, 300, TimeUnit.MINUTES);
+        stringRedisTemplate.opsForValue().set(checkCodePrefix, text, 5, TimeUnit.MINUTES);
         return ResponseResult.ok(map);
     }
 
