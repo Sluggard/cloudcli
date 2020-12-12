@@ -3,6 +3,7 @@ package com.sluggard.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.sluggard.entity.OauthClientDetails;
+import org.springframework.security.oauth2.provider.ClientDetailsService;
 
 /**
  * <p>
@@ -12,7 +13,7 @@ import com.sluggard.entity.OauthClientDetails;
  * @author lizheng
  * @since 2020-09-17
  */
-public interface OauthClientDetailsService extends IService<OauthClientDetails> {
+public interface OauthClientDetailsService extends IService<OauthClientDetails>, ClientDetailsService {
 
     /**
      * 客户端注册

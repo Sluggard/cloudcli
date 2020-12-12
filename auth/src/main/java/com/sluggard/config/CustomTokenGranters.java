@@ -2,6 +2,7 @@ package com.sluggard.config;
 
 import com.sluggard.events.LoginSuccessApplicationEvent;
 import com.sluggard.mobile.MobileTokenGranter;
+import com.sluggard.service.OauthClientDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
@@ -40,7 +41,7 @@ import java.util.List;
 public class CustomTokenGranters implements ApplicationEventPublisherAware {
 
     @Autowired
-    private ClientDetailsService clientDetails;
+    private OauthClientDetailsService oauthClientDetailsService;
 
     @Autowired
     private DefaultTokenServices tokenServices;
@@ -58,20 +59,20 @@ public class CustomTokenGranters implements ApplicationEventPublisherAware {
     }
 
     private List<TokenGranter> getCustomTokenGranters() {
-        OAuth2RequestFactory requestFactory = new DefaultOAuth2RequestFactory(clientDetails);
+        OAuth2RequestFactory requestFactory = new DefaultOAuth2RequestFactory(oauthClientDetailsService);
 
         List<TokenGranter> tokenGranters = new ArrayList<TokenGranter>();
-        tokenGranters.add(new AuthorizationCodeTokenGranter(tokenServices, authorizationCodeServices, clientDetails,
+        tokenGranters.add(new AuthorizationCodeTokenGranter(tokenServices, authorizationCodeServices, oauthClientDetailsService,
                 requestFactory));
-        tokenGranters.add(new RefreshTokenGranter(tokenServices, clientDetails, requestFactory));
-        ImplicitTokenGranter implicit = new ImplicitTokenGranter(tokenServices, clientDetails, requestFactory);
+        tokenGranters.add(new RefreshTokenGranter(tokenServices, oauthClientDetailsService, requestFactory));
+        ImplicitTokenGranter implicit = new ImplicitTokenGranter(tokenServices, oauthClientDetailsService, requestFactory);
         tokenGranters.add(implicit);
-        tokenGranters.add(new ClientCredentialsTokenGranter(tokenServices, clientDetails, requestFactory));
+        tokenGranters.add(new ClientCredentialsTokenGranter(tokenServices, oauthClientDetailsService, requestFactory));
         if (authenticationManager != null) {
             tokenGranters.add(new ResourceOwnerPasswordTokenGranter(authenticationManager, tokenServices,
-                    clientDetails, requestFactory));
+                    oauthClientDetailsService, requestFactory));
             tokenGranters.add(new MobileTokenGranter(authenticationManager, tokenServices,
-                    clientDetails, requestFactory));
+                    oauthClientDetailsService, requestFactory));
         }
         return tokenGranters;
     }

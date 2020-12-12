@@ -2,7 +2,9 @@ package com.sluggard.config;
 
 import com.sluggard.security.custom.CustomAccessDeniedHandler;
 import com.sluggard.security.custom.CustomAuthenticationEntryPoint;
+import com.sluggard.service.OauthClientDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -58,6 +60,9 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
     private UserDetailsService userDetailsService;
 
     @Autowired
+    private OauthClientDetailsService oauthClientDetailsService;
+
+    @Autowired
     private CustomAccessDeniedHandler customerAccessDeniedHandler;
 
     @Autowired
@@ -66,14 +71,9 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
     @Autowired
     private CustomTokenGranters customTokenGranters;
 
-    @Bean
-    public ClientDetailsService clientDetails() {
-        return new JdbcClientDetailsService(dataSource);
-    }
-
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.jdbc(dataSource).clients(clientDetails());
+        clients.withClientDetails(oauthClientDetailsService);
     }
 
     @Override
