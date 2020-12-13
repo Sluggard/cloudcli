@@ -47,7 +47,8 @@ public class RedisConfig {
         config.useMasterSlaveServers()
                 .setMasterAddress(HEAD + host + ":" + port)
                 .setDatabase(database)
-                .setPassword(password).setReadMode(ReadMode.MASTER_SLAVE);
+                .setPassword(password).setReadMode(ReadMode.MASTER_SLAVE)
+                .setPingConnectionInterval(30000);
         return Redisson.create(config);
     }
 
