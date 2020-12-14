@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
     * </p>
  *
  * @author lizheng
- * @since 2020-12-13
+ * @since 2020-12-14
  */
 @Service
 public class UpmsDepartmentServiceImpl extends ServiceImpl<UpmsDepartmentMapper, UpmsDepartment> implements UpmsDepartmentService {

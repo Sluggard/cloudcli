@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sluggard.mapper.UpmsUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.sluggard.entity.UpmsUser">
+        <id column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+        <result column="head_portrait" property="headPortrait" />
+        <result column="real_name" property="realName" />
+        <result column="gender" property="gender" />
+        <result column="age" property="age" />
+        <result column="id_no" property="idNo" />
+        <result column="telephone" property="telephone" />
+        <result column="birth_day" property="birthDay" />
+        <result column="remark" property="remark" />
+        <result column="enable" property="enable" />
+        <result column="locked" property="locked" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="version" property="version" />
+        <result column="deleted" property="deleted" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, username, password, head_portrait, real_name, gender, age, id_no, telephone, birth_day, remark, enable, locked, create_time, update_time, version, deleted
+    </sql>
+
+</mapper>

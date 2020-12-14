@@ -1,9 +1,12 @@
 package com.sluggard.entity;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import java.util.Date;
-
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -20,7 +23,7 @@ import lombok.Builder;
     * </p>
  *
  * @author lizheng
- * @since 2020-12-13
+ * @since 2020-12-14
  */
 @Data
 @Builder

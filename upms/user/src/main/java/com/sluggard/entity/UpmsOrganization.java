@@ -1,10 +1,12 @@
 package com.sluggard.entity;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-
 import java.util.Date;
-
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -17,11 +19,11 @@ import lombok.Builder;
 
 /**
  * <p>
- * 组织信息表
- * </p>
+    * 组织信息表
+    * </p>
  *
  * @author lizheng
- * @since 2020-12-13
+ * @since 2020-12-14
  */
 @Data
 @Builder
@@ -29,7 +31,7 @@ import lombok.Builder;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "UpmsOrganization", description = "组织信息")
+@ApiModel(value="UpmsOrganization", description="组织信息")
 public class UpmsOrganization extends Model<UpmsOrganization> {
 
     private static final long serialVersionUID = 1L;

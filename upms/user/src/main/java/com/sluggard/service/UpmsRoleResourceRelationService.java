@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
     * </p>
  *
  * @author lizheng
- * @since 2020-12-13
+ * @since 2020-12-14
  */
 public interface UpmsRoleResourceRelationService extends IService<UpmsRoleResourceRelation> {
 

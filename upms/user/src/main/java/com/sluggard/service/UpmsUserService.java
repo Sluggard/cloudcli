@@ -1,23 +1,21 @@
 package com.sluggard.service;
 
+import com.sluggard.entity.UpmsUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.sluggard.feign.vo.Customer;
-import com.sluggard.entity.SysUser;
 
 /**
  * <p>
-    * 系统用户信息表 服务类
+    * 系统后台用户信息表 服务类
     * </p>
  *
  * @author lizheng
- * @since 2020-07-07
+ * @since 2020-12-14
  */
-public interface SysUserService extends IService<SysUser> {
-
-    SysUser getUserInfo();
+public interface UpmsUserService extends IService<UpmsUser> {
 
     /**
-     * 获取用户信息
+     * 通过用户名获取用户信息
      * @param username
      * @return
      */
