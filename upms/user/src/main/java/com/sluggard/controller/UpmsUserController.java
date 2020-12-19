@@ -69,7 +69,7 @@ public class UpmsUserController {
     @ApiOperation(value = "分页条件查询系统后台用户信息", notes = "分页条件查询系统后台用户信息")
     @PostMapping("pageQuery")
     public ResponseResult pageQuery(@RequestBody PageQuery<UpmsUser> pageQuery) {
-        return ResponseResult.ok(upmsUserService.page(pageQuery.parsePage()));
+        return ResponseResult.ok(upmsUserService.pageQuery(pageQuery));
     }
 
     @ApiOperation("通过用户名获取用户信息")

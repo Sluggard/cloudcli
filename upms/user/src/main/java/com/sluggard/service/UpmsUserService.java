@@ -1,8 +1,10 @@
 package com.sluggard.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.sluggard.entity.UpmsUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.sluggard.feign.vo.Customer;
+import com.sluggard.mybatis.vo.PageQuery;
 
 /**
  * <p>
@@ -20,4 +22,11 @@ public interface UpmsUserService extends IService<UpmsUser> {
      * @return
      */
     Customer loadUserByUsername(String username);
+
+    /**
+     * 分页查询
+     * @param pageQuery
+     * @return
+     */
+    IPage<UpmsUser> pageQuery(PageQuery<UpmsUser> pageQuery);
 }
