@@ -1,5 +1,8 @@
 package com.sluggard.enums;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * @author：lizheng@homedone.net
  * @description
@@ -13,8 +16,18 @@ package com.sluggard.enums;
  */
 public enum Gender  {
 
-    MAN,
-    FEMALE,
-    SECCRET,
+    MAN("男"),
+    FEMALE("女"),
+    SECRET("保密"),
+    ;
+
+    @Setter
+    @Getter
+    private String desc;
+
+    Gender(String desc) {
+        this.desc = desc;
+    }
+
 
 }

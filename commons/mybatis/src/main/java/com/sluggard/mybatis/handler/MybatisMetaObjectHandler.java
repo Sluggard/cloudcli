@@ -23,13 +23,13 @@ public class MybatisMetaObjectHandler implements MetaObjectHandler {
     public void insertFill(MetaObject metaObject) {
         this.strictInsertFill(metaObject, "version", Integer.class, 0);
         this.strictInsertFill(metaObject, "deleted", Boolean.class, Boolean.FALSE);
-        this.strictInsertFill(metaObject, "createdTime",  LocalDateTime.class, LocalDateTime.now());
-        this.strictInsertFill(metaObject, "updatedTime", LocalDateTime.class, LocalDateTime.now());
+        this.strictInsertFill(metaObject, "createTime",  Date.class, new Date());
+        this.strictInsertFill(metaObject, "updateTime", Date.class, new Date());
     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
-        this.strictUpdateFill(metaObject, "updatedTime", LocalDateTime.class, LocalDateTime.now());
+        this.strictUpdateFill(metaObject, "updateTime", Date.class, new Date());
     }
 
 }

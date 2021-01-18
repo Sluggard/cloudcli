@@ -1,6 +1,7 @@
 package com.sluggard.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.Version;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -77,6 +78,7 @@ public class UmpsMenu extends Model<UmpsMenu> {
 
     @ApiModelProperty(value = "版本号")
     @TableField(fill = FieldFill.INSERT)
+    @Version
     private Integer version;
 
     @ApiModelProperty(value = "逻辑删除")

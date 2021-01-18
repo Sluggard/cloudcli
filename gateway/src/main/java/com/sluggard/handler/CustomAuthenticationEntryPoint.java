@@ -5,6 +5,7 @@ import com.sluggard.common.vo.ResponseResult;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferFactory;
 import org.springframework.core.io.buffer.DataBufferUtils;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;
@@ -15,6 +16,8 @@ import org.springframework.security.web.server.ServerAuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
+
+import java.util.Arrays;
 
 /**
  * @Desc 自定义未登录返回
@@ -32,6 +35,9 @@ public class CustomAuthenticationEntryPoint implements ServerAuthenticationEntry
                 .flatMap(response -> {
                     response.setStatusCode(this.getStatus(authException));
                     response.getHeaders().setContentType(MediaType.APPLICATION_JSON_UTF8);
+                    response.getHeaders().setAccessControlAllowCredentials(Boolean.TRUE);
+                    response.getHeaders().setAccessControlAllowMethods(Arrays.asList(HttpMethod.GET, HttpMethod.POST, HttpMethod.PUT, HttpMethod.DELETE));
+                    response.getHeaders().setAccessControlAllowOrigin("*");
 
                     DataBufferFactory dataBufferFactory = response.bufferFactory();
                     ResponseResult responseResult = ResponseResult.error(ResponseResult.RESPONSE_RESULT_CODE_UNAUTHORIZED, "用户未登录!");

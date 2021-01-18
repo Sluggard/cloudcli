@@ -48,6 +48,8 @@ public class ResourceServerConfig {
         ;
         // 开起jwt需打开
         http.oauth2ResourceServer()
+                .accessDeniedHandler(deniedHandler)
+                .authenticationEntryPoint(authenticationEntryPoint)
                 .jwt();
         return http.build();
     }

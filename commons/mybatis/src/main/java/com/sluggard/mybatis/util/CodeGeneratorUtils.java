@@ -137,6 +137,7 @@ public class CodeGeneratorUtils {
                 .setNaming(NamingStrategy.underline_to_camel)
                 // 生成的表
                 .setInclude(tables)
+                .setVersionFieldName("version")
                 .setTableFillList(tableFillList)
                 .setEntityBooleanColumnRemoveIsPrefix(false)
                 .setRestControllerStyle(true)

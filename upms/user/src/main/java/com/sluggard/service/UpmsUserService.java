@@ -6,6 +6,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.sluggard.feign.vo.Customer;
 import com.sluggard.mybatis.vo.PageQuery;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+
 /**
  * <p>
     * 系统后台用户信息表 服务类
@@ -29,4 +32,35 @@ public interface UpmsUserService extends IService<UpmsUser> {
      * @return
      */
     IPage<UpmsUser> pageQuery(PageQuery<UpmsUser> pageQuery);
+
+    /**
+     * 保存用户信息
+     * @param upmsUser
+     */
+    void saveUser(UpmsUser upmsUser);
+
+    /**
+     * 更新用户信息
+     * @param upmsUser
+     */
+    void updateUser(UpmsUser upmsUser);
+
+    /**
+     * 改变用户状态
+     * @param id
+     * @param status
+     */
+    void changeStatus(Integer id, Boolean status);
+
+    /**
+     * 解锁/锁定用户
+     * @param id
+     * @param status
+     */
+    void lockStatus(Integer id, Boolean status);
+
+    /**
+     * 用户信息上传模板导出
+     */
+    void templateExport() throws IOException;
 }

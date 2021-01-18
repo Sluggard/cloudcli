@@ -26,7 +26,7 @@ import java.util.Map;
 public class FeignInterceptor implements RequestInterceptor {
     @Override
     public void apply(RequestTemplate requestTemplate) {
-        log.info("请求地址：{}, 请求参数：{}", requestTemplate.url(), requestTemplate.queries());
+//        log.info("请求地址：{}, 请求参数：{}", requestTemplate.url(), requestTemplate.queries());
         try {
             Map<String, String> headers = getHeaders();
             for (Map.Entry<String, String> entry : headers.entrySet()) {
