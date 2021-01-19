@@ -47,8 +47,8 @@ import java.util.function.Supplier;
  * @Copyright © 2019-2021
  */
 @Slf4j
-@Component
-@RefreshScope
+//@Component
+//@RefreshScope
 public class RequestDetailLogGlobalFilter implements GlobalFilter, Ordered {
 
     private static final String CHARSET = "UTF-8";

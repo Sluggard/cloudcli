@@ -41,11 +41,7 @@ import java.util.Date;
 @HeadRowHeight(20)
 @ColumnWidth(12)
 @Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
 @ApiModel(value="UpmsUser", description="系统后台用户信息")
 public class UpmsUser extends Model<UpmsUser> {
 
@@ -57,7 +53,7 @@ public class UpmsUser extends Model<UpmsUser> {
     private Integer id;
 
     @ApiModelProperty(value = "用户名")
-    @ExcelProperty("用户名")
+    @ExcelProperty(value = "用户名",index = 0)
     private String username;
 
     @ApiModelProperty(value = "密码")
@@ -69,58 +65,58 @@ public class UpmsUser extends Model<UpmsUser> {
     private String headPortrait;
 
     @ApiModelProperty(value = "姓名")
-    @ExcelProperty("姓名")
+    @ExcelProperty(value = "姓名",index = 1)
     private String realName;
 
     @ApiModelProperty(value = "性别")
-    @ExcelProperty(value = "性别",converter = Gender2StringConverter.class)
+    @ExcelProperty(value = "性别",converter = Gender2StringConverter.class,index = 2)
     private Gender gender;
 
     @ApiModelProperty(value = "年龄")
-    @ExcelProperty("年龄")
+    @ExcelProperty(value = "年龄",index = 3)
     private Integer age;
 
     @ApiModelProperty(value = "身份证号码")
-    @ExcelProperty("身份证号码")
+    @ExcelProperty(value = "身份证号码",index = 4)
     @ColumnWidth(20)
     private String idNo;
 
     @ApiModelProperty(value = "电话号码")
-    @ExcelProperty("电话号码")
+    @ExcelProperty(value = "电话号码",index = 5)
     @ColumnWidth(15)
     private String telephone;
 
     @DateTimeFormat("yyyy年MM月dd日")
     @ApiModelProperty(value = "生日")
-    @ExcelProperty("生日")
+    @ExcelProperty(value = "生日",index = 6)
     @ColumnWidth(20)
     private Date birthDay;
 
 
     @ApiModelProperty(value = "启用/禁用")
-    @ExcelProperty(value = "启用/禁用",converter = Boolean2StringConverter.class)
+    @ExcelProperty(value = "启用/禁用",converter = Boolean2StringConverter.class,index = 7)
     private Boolean enable;
 
     @ApiModelProperty(value = "锁定")
-    @ExcelProperty(value = "锁定",converter = Boolean2StringConverter.class)
+    @ExcelProperty(value = "锁定",converter = Boolean2StringConverter.class,index = 8)
     private Boolean locked;
 
     @DateTimeFormat("yyyy年MM月dd日HH时mm分ss秒")
     @ApiModelProperty(value = "创建时间")
     @TableField(fill = FieldFill.INSERT)
-    @ExcelProperty("创建时间")
-    @ColumnWidth(25)
+    @ExcelProperty(value = "创建时间",index = 9)
+    @ColumnWidth(30)
     private Date createTime;
 
     @DateTimeFormat("yyyy年MM月dd日HH时mm分ss秒")
     @ApiModelProperty(value = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    @ExcelProperty("更新时间")
-    @ColumnWidth(25)
+    @ExcelProperty(value = "更新时间",index = 10)
+    @ColumnWidth(30)
     private Date updateTime;
 
     @ApiModelProperty(value = "备注")
-    @ExcelProperty("备注")
+    @ExcelProperty(value = "备注",index = 11)
     private String remark;
 
     @ApiModelProperty(value = "版本号")

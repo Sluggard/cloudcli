@@ -17,7 +17,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -99,14 +102,15 @@ public class UpmsUserController {
 
     @ApiOperation("批量导入用户")
     @PostMapping("/batchImport")
-    public ResponseResult batchImport(){
+    public ResponseResult batchImport(@RequestPart("file") MultipartFile file) throws IOException {
+        upmsUserService.batchImport(file);
         return ResponseResult.ok();
     }
 
     @ApiOperation("用户信息导出")
     @PostMapping("/export")
-    public ResponseResult export(){
-        return ResponseResult.ok();
+    public void export(@RequestBody UpmsUser upmsUser) throws IOException {
+        upmsUserService.export(upmsUser);
     }
 
     @ApiOperation("用户信息上传模板导出")

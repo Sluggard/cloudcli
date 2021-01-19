@@ -5,6 +5,7 @@ import com.sluggard.entity.UpmsUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.sluggard.feign.vo.Customer;
 import com.sluggard.mybatis.vo.PageQuery;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -61,6 +62,20 @@ public interface UpmsUserService extends IService<UpmsUser> {
 
     /**
      * 用户信息上传模板导出
+     * @throws IOException
      */
     void templateExport() throws IOException;
+
+    /**
+     * 用户信息导出
+     * @param upmsUser
+     * @throws IOException
+     */
+    void export(UpmsUser upmsUser) throws IOException;
+
+    /**
+     * 用户信息导入
+     * @param file
+     */
+    void batchImport(MultipartFile file) throws IOException;
 }
