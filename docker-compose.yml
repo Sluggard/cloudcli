@@ -1,0 +1,28 @@
+version: '3'
+
+networks:
+  default:
+    external:
+      name: cloud
+
+services:
+  auth:
+    image: auth
+    restart: always
+    container_name: auth
+    ports:
+    - 8080:8080
+
+  user:
+    image: user
+    restart: always
+    container_name: user
+    ports:
+      - 8090:8080
+
+  gateway:
+    image: gateway
+    restart: always
+    container_name: gateway
+    ports:
+      - 8200:8080
