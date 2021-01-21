@@ -1,15 +1,19 @@
 package com.sluggard.controller;
 
 
+import com.sluggard.common.utls.AssertHelper;
 import com.sluggard.common.vo.ResponseResult;
 import com.sluggard.entity.UpmsUser;
 import com.sluggard.feign.vo.Customer;
 import com.sluggard.mybatis.vo.PageQuery;
 import com.sluggard.service.UpmsUserService;
+import com.sluggard.vo.ChangePasswordVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,6 +42,9 @@ import java.util.List;
 @Api(value="UpmsUserController",tags={"系统后台用户信息操作接口"})
 @RequestMapping("/v1/upmsUser")
 public class UpmsUserController {
+
+    @Autowired
+    private RedisTemplate<String, String> redisTemplate;
 
     @Autowired
     private UpmsUserService upmsUserService;
@@ -117,6 +124,25 @@ public class UpmsUserController {
     @GetMapping("/templateExport")
     public void templateExport() throws IOException {
         upmsUserService.templateExport();
+    }
+
+    @ApiOperation("当前用户信息")
+    @GetMapping("/currentUser")
+    public ResponseResult currentUser() {
+        return  ResponseResult.ok(upmsUserService.currentUser());
+    }
+
+
+    @ApiOperation("修改密码")
+    @PutMapping("/changPassword")
+    public ResponseResult changPassword(@RequestBody ChangePasswordVo changePasswordVo) {
+        String checkCode = redisTemplate.opsForValue().get(changePasswordVo.getCheckCodePrefix());
+        redisTemplate.delete(changePasswordVo.getCheckCodePrefix());
+        AssertHelper.fail(StringUtils.isBlank(changePasswordVo.getCheckCode()) ||
+                !StringUtils.equalsIgnoreCase(changePasswordVo.getCheckCode(), checkCode), "图片验证码错误");
+
+        upmsUserService.changPassword(changePasswordVo);
+        return  ResponseResult.ok();
     }
 
 }

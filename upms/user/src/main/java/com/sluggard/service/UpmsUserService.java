@@ -5,6 +5,7 @@ import com.sluggard.entity.UpmsUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.sluggard.feign.vo.Customer;
 import com.sluggard.mybatis.vo.PageQuery;
+import com.sluggard.vo.ChangePasswordVo;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -78,4 +79,16 @@ public interface UpmsUserService extends IService<UpmsUser> {
      * @param file
      */
     void batchImport(MultipartFile file) throws IOException;
+
+    /**
+     * 当前用户信息
+     * @return
+     */
+    UpmsUser currentUser();
+
+    /**
+     * 修改用户密码
+     * @param changePasswordVo
+     */
+    void changPassword(ChangePasswordVo changePasswordVo);
 }

@@ -1,12 +1,10 @@
 package com.sluggard.security.util;
 
-import com.alibaba.fastjson.JSONObject;
 import com.sluggard.security.cnstant.SecurityConstants;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,17 +26,13 @@ public class SecurityHelper {
     /**
      * 获取用户
      */
-    public static UserDetails getUser() {
+    public static String getUser() {
         Authentication authentication = getAuthentication();
         if (authentication == null) {
             return null;
         }
 
-        Object principal = authentication.getPrincipal();
-        if(principal != null && !"anonymousUser".equals(principal)){
-           return JSONObject.parseObject(principal.toString(), UserDetails.class);
-        }
-        return null;
+        return authentication.getPrincipal().toString();
     }
 
     /**

@@ -16,7 +16,9 @@ import com.sluggard.entity.UpmsUser;
 import com.sluggard.feign.vo.Customer;
 import com.sluggard.mapper.UpmsUserMapper;
 import com.sluggard.mybatis.vo.PageQuery;
+import com.sluggard.security.util.SecurityHelper;
 import com.sluggard.service.UpmsUserService;
+import com.sluggard.vo.ChangePasswordVo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.BeanUtils;
@@ -174,6 +176,21 @@ public class UpmsUserServiceImpl extends ServiceImpl<UpmsUserMapper, UpmsUser> i
         }finally {
             FileUtils.deleteQuietly(tmpFile);
         }
+    }
+
+    @Override
+    public UpmsUser currentUser() {
+        return this.baseMapper.selectOne(new LambdaQueryWrapper<UpmsUser>().eq(UpmsUser::getUsername, SecurityHelper.getUser()));
+    }
+
+    @Override
+    public void changPassword(ChangePasswordVo changePasswordVo) {
+        UpmsUser upmsUser = this.baseMapper.selectById(changePasswordVo.getId());
+        AssertHelper.fail(!passwordEncoder.matches(changePasswordVo.getOldPassword(), upmsUser.getPassword()), "旧密码输入错误");
+
+        upmsUser.setPassword(passwordEncoder.encode(changePasswordVo.getNewPassword()));
+        this.baseMapper.updateById(upmsUser);
+
     }
 
     private void setResponseHeader(String fileName) throws UnsupportedEncodingException {
