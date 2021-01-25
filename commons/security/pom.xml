@@ -12,7 +12,7 @@
     <artifactId>security</artifactId>
 
     <properties>
-        <spring-security-oauth.version>2.3.4.RELEASE</spring-security-oauth.version>
+        <spring-security-oauth.version>2.3.5.RELEASE</spring-security-oauth.version>
         <servlet-api.version>2.5</servlet-api.version>
     </properties>
     <dependencies>
